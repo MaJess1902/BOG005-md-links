@@ -23,9 +23,16 @@ function readPath(route) {
     console.log("no hay ruta");
   }
 
-  // if(myRoute){// leer que hay en las rutas -- leer process - 
+  if(myRoute){// leer que hay en las rutas -- leer process - 
+    console.log(myRoute, 2)
 
-  // }
+    fs.readdir(myRoute, (error, files) =>{
+      if(error){
+        throw error
+      }
+      console.log(files)
+    })
+  }
 }
 readPath(argsTerminal[2])
 
