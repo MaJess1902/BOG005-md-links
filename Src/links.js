@@ -1,9 +1,8 @@
 const fs = require('fs')
 const marked = require('marked');
-const { resolve } = require('path');
-const { readPath, readPathF } = require("./path.js");
-const axios = require("axios");
-const { rejects } = require('assert');
+const { readPathF } = require("./path.js");
+const { validateLink } = require("./validateLinks");
+
 
 function getLinks(element) {
     const links = [];
@@ -16,7 +15,7 @@ function getLinks(element) {
                     if (token.type === 'link' && token.href.includes('http')) {
                         links.push({
                             href: token.href,
-                            text: token.text.slice(0, 50),
+                            text: token.text,
                             file: element
                         })
                     }
@@ -34,10 +33,13 @@ function fixArrayObjects() {
         Promise.all(allLinks).then((res) => {
             resolve(res.flat());
             arrayPromises = (res.flat());
-            console.log(arrayPromises,37);
+            console.log(arrayPromises, 37);
         })
     })
 }
+
+
+
 
 const arrayObjects = fixArrayObjects(readPathF);
 
