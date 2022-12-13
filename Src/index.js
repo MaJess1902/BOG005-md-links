@@ -1,16 +1,17 @@
 const { fixArrayObjects } = require("./links");
 const { validateLinks } = require("./validateLinks");
 const { readPath } = require("./path");
-
 const routeUser = process.argv[2];
 
-let mdLinks = (path, options = { validate: true }) => {
+const mdLinks = (path, options = { validate: true }) => {
     return new Promise((resolve, reject) => {
         const validatePath = readPath(path);
-        if (options.validate === true) {
+        if (options.validate) {
             fixArrayObjects(validatePath)
-                .then(response => validateLinks(response))
-                .then(response => resolve(response))
+                .then(response => {
+                    validateLinks(response)
+                    resolve(response);
+                })
         }
         else {
             fixArrayObjects(validatePath)
@@ -18,5 +19,7 @@ let mdLinks = (path, options = { validate: true }) => {
         }
     })
 }
-mdLinks(routeUser).then(rest => (rest))
 
+module.exports = {
+    mdLinks,
+}

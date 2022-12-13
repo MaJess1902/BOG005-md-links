@@ -37,7 +37,6 @@ function readPath(route) {
                 }
             })
         }
-        console.log(onlyMds);
     } return onlyMds
 }
 

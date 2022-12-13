@@ -1,7 +1,6 @@
 const fs = require('fs')
 const marked = require('marked');
 const { readPathF } = require("./path.js");
-const { validateLink } = require("./validateLinks");
 
 
 function getLinks(element) {
@@ -33,7 +32,6 @@ function fixArrayObjects() {
         Promise.all(allLinks).then((res) => {
             resolve(res.flat());
             arrayPromises = (res.flat());
-            console.log(arrayPromises, 37);
         })
     })
 }
